@@ -17,7 +17,11 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/rameshkumarvermagithub/fullstack-bank.git'
             }
         }
-        
+        // stage('Install Dependencies') {
+        //     steps {
+        //         sh "npm install"
+        //     }
+        // }
         stage('OWASP FS SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./app/backend --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
@@ -48,7 +52,7 @@ pipeline {
         
         stage('Backend') {
             steps {
-                dir('/root/.jenkins/workspace/Bank/app/backend') {
+                dir('/var/lib/jenkins/workspace/bank/app/backend') {
                     sh "npm install"
                 }
             }
@@ -56,7 +60,7 @@ pipeline {
         
         stage('frontend') {
             steps {
-                dir('/root/.jenkins/workspace/Bank/app/frontend') {
+                dir('/var/lib/jenkins/workspace/bank/app/frontend') {
                     sh "npm install"
                 }
             }
