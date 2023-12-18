@@ -17,11 +17,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/rameshkumarvermagithub/fullstack-bank.git'
             }
         }
-        // stage('Install Dependencies') {
-        //     steps {
-        //         sh "npm install"
-        //     }
-        // }
+        
         stage('OWASP FS SCAN') {
             steps {
                 dependencyCheck additionalArguments: '--scan ./app/backend --disableYarnAudit --disableNodeAudit', odcInstallation: 'DP-Check'
